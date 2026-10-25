@@ -1,17 +1,11 @@
-/* ===== style.css ===== */
-/* ============================================================
-   ATTENDANCE MANAGER — CORE STYLESHEET
-   Design language: "Bloomly" — soft sage/purple/mint, rounded,
-   growth-themed. Progress reads as growth; the weekly chart
-   panels are a fixed "growlight" mint regardless of theme.
-   ============================================================ */
+/* Presence stylesheet: theme colors, layout, components, animations, responsive */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
 :root {
   color-scheme: dark;
 
-  /* ---- palette (dark) — per 2026 SaaS spec ---- */
+  /* dark colors */
   --bg: #101010;
   --bg-elevated: #191919;
   --card: #222222;
@@ -37,25 +31,25 @@
   --danger: #FF7A66;
   --danger-soft: rgba(255, 122, 102, 0.16);
 
-  /* ---- type ---- */
+  /* fonts */
   --font-display: 'Poppins', 'SF Pro Display', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', 'Plus Jakarta Sans', 'SF Pro Display', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  /* ---- geometry (24-32px card radius, pill buttons) ---- */
+  /* sizes and radius */
   --radius-sm: 14px;
   --radius-md: 24px;
   --radius-lg: 28px;
   --radius-xl: 32px;
   --nav-h: 84px;
 
-  /* ---- shadow / glass ---- */
+  /* shadows and glass */
   --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.45);
   --shadow-glow: 0 0 40px rgba(167, 155, 255, 0.25);
   --glass-bg: rgba(30, 33, 38, 0.6);
   --glass-border: rgba(255, 255, 255, 0.08);
 
-  /* ---- subtle overlays (hover states, tracks, hairlines) ---- */
+  /* hover, track and line colors */
   --overlay-1: rgba(255, 255, 255, 0.03);
   --overlay-2: rgba(255, 255, 255, 0.05);
   --overlay-3: rgba(255, 255, 255, 0.08);
@@ -65,7 +59,7 @@
   --skeleton-2: rgba(255, 255, 255, 0.1);
   --nav-bg: rgba(20, 22, 26, 0.7);
 
-  /* ---- fixed "growlight" panel — stays mint in both themes ---- */
+  /* mint chart panel, same in both themes */
   --grow-bg: #CFE7C0;
   --grow-bg-2: #BEDCAC;
   --grow-ink: #1E2A17;
@@ -78,12 +72,7 @@
   color-scheme: dark;
 }
 
-/* ============================================================
-   LIGHT THEME
-   Soft sage-and-cream daylight surfaces, purple as the primary
-   accent, coral/mint as supporting warmth — the same growth
-   story, just told in sunlight.
-   ============================================================ */
+/* light theme */
 html[data-theme="light"] {
   color-scheme: light;
   --bg: #EEF1E4;
@@ -128,9 +117,7 @@ html[data-theme="light"] {
 html, body { transition: background .5s var(--ease), color .4s var(--ease); }
 body { font-family: var(--font-body); }
 
-/* ============================================================
-   RESET
-   ============================================================ */
+/* reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -145,7 +132,7 @@ body {
   position: relative;
 }
 
-/* ambient background blobs, sit behind all content */
+/* background blobs */
 body::before,
 body::after {
   content: '';
@@ -186,7 +173,7 @@ h1, h2, h3, h4, h5 {
 
 ::selection { background: var(--accent); color: #fff; }
 
-/* focus visibility (accessibility floor) */
+/* focus outline */
 a:focus-visible, button:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   outline: 2px solid var(--accent-2);
@@ -227,9 +214,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   box-shadow: 0 0 10px var(--accent-2);
 }
 
-/* ============================================================
-   NAVIGATION — fixed, frosted glass
-   ============================================================ */
+/* navbar */
 .site-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -290,7 +275,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 .nav-brand span.txt { display: none; }
 
-/* ---- auth button group: kept visually separate from theme toggle & the rest of nav ---- */
+/* sign in / sign up buttons */
 .nav-divider {
   display: none;
   width: 1px;
@@ -319,10 +304,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 }
 .nav-toggle span { width: 18px; height: 2px; background: var(--text); border-radius: 2px; }
 
-/* ============================================================
-   PAGE LOADING SCREEN — pure CSS, shows before the homepage,
-   then fades away on its own (no JS involved).
-   ============================================================ */
+/* page loading screen */
 .page-loader {
   position: fixed;
   inset: 0;
@@ -369,9 +351,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   to { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 
-/* ============================================================
-   THEME TOGGLE — sun / moon morph
-   ============================================================ */
+/* theme toggle button */
 .theme-toggle {
   position: relative;
   width: 48px; height: 48px;
@@ -421,9 +401,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
   100% { opacity: 0; transform: scale(1.5); }
 }
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
+/* buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -481,9 +459,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
 .btn-block { width: 100%; }
 .btn[disabled] { opacity: 0.45; pointer-events: none; }
 
-/* ============================================================
-   GLASS CARD
-   ============================================================ */
+/* cards */
 .glass-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -506,9 +482,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
   padding: 24px;
 }
 
-/* ============================================================
-   HERO
-   ============================================================ */
+/* hero */
 .hero {
   min-height: auto;
   display: block;
@@ -568,9 +542,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
 .floating-card .big.green { color: var(--success); }
 .floating-card .big.blue { color: var(--accent-2); }
 
-/* ============================================================
-   SECTIONS
-   ============================================================ */
+/* sections */
 .section { padding: 64px 0; position: relative; }
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
 .section-head h2 { font-size: clamp(28px, 3.6vw, 42px); margin-bottom: 14px; }
@@ -593,9 +565,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
 .feature-card h3 { font-size: 18px; margin-bottom: 10px; }
 .feature-card p { color: var(--text-dim); font-size: 14.5px; }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* footer */
 .site-footer {
   background: var(--bg-elevated);
   border-top: 1px solid var(--border);
@@ -626,9 +596,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
   gap: 10px;
 }
 
-/* ============================================================
-   FORMS / AUTH
-   ============================================================ */
+/* forms and login / signup */
 .auth-wrap {
   min-height: 100vh;
   display: flex;
@@ -664,12 +632,7 @@ html:not([data-theme]) .theme-toggle .moon { opacity: 1; transform: scale(1) rot
 }
 .field input::placeholder { color: var(--text-faint); }
 
-/* Native <option> popups ignore the parent select's background in some
-   browsers, which can leave option text unreadable until hovered.
-   color-scheme is set on :root (above) as the primary fix — it tells
-   the browser which native palette to render the popup with. These
-   explicit colors are a belt-and-braces backup for browsers that
-   only partially honor that hint. */
+/* dropdown options can be unreadable in some browsers, so the colors are set here too */
 select { color-scheme: dark; }
 html[data-theme="light"] select { color-scheme: light; }
 select option {
@@ -718,12 +681,8 @@ select option {
 
 .auth-switch { text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-dim); }
 
-.divider-or { display: flex; align-items: center; gap: 14px; margin: 22px 0; color: var(--text-faint); font-size: 12.5px; }
-.divider-or::before, .divider-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-/* ============================================================
-   APP SHELL — sidebar + top bar (dashboards)
-   ============================================================ */
+/* sidebar and top bar */
 .app-shell { display: flex; flex-direction: column; min-height: 100vh; padding-top: var(--nav-h); }
 
 .sidebar {
@@ -820,9 +779,7 @@ select option {
 .breadcrumb { font-size: 12.5px; color: var(--text-faint); margin-bottom: 10px; }
 .breadcrumb .active { color: var(--accent-2); }
 
-/* ============================================================
-   STAT CARDS
-   ============================================================ */
+/* stat cards */
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -846,9 +803,7 @@ select option {
 .stat-card .value { font-family: var(--font-display); font-size: 30px; font-weight: 800; margin-bottom: 4px; }
 .stat-card .label { color: var(--text-faint); font-size: 13px; }
 
-/* ============================================================
-   TABLES
-   ============================================================ */
+/* tables */
 .table-toolbar {
   display: flex;
   flex-direction: column;
@@ -935,13 +890,8 @@ td.name-cell .roll { color: var(--text-faint); font-size: 12px; display: block; 
 .status-toggle button.d:hover, .status-toggle button.d.on { background: rgba(196,181,253,0.15); color: #c4b5fd; border-color: #c4b5fd; }
 
 .pagination { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-faint); flex-wrap: wrap; gap: 12px; }
-.page-btns { display: flex; gap: 6px; }
-.page-btns button { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border-strong); font-size: 13px; color: var(--text-dim); }
-.page-btns button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-/* ============================================================
-   PROGRESS RINGS / BARS
-   ============================================================ */
+/* progress rings and bars */
 .ring-wrap { position: relative; width: 120px; height: 120px; margin: 0 auto; }
 .ring-wrap svg { transform: rotate(-90deg); }
 .ring-bg { fill: none; stroke: var(--overlay-3); stroke-width: 10; }
@@ -958,9 +908,7 @@ td.name-cell .roll { color: var(--text-faint); font-size: 12px; display: block; 
 .progress-bar.green > span { background: linear-gradient(90deg, #16a34a, var(--success)); }
 .progress-bar.red > span { background: linear-gradient(90deg, #b91c1c, var(--danger)); }
 
-/* ============================================================
-   MISC COMPONENTS: timeline, heatmap, activity feed, chart bars
-   ============================================================ */
+/* timeline, heatmap, activity feed, chart bars */
 .activity-feed { display: flex; flex-direction: column; gap: 4px; }
 .activity-item { display: flex; gap: 14px; padding: 14px 4px; border-bottom: 1px solid var(--border); }
 .activity-item:last-child { border-bottom: none; }
@@ -990,9 +938,7 @@ td.name-cell .roll { color: var(--text-faint); font-size: 12px; display: block; 
 .bar-chart .bar { width: 100%; border-radius: 8px 8px 0 0; background: linear-gradient(180deg, var(--accent-2), var(--accent)); position: relative; }
 .bar-chart .bar-label { font-size: 11.5px; color: var(--text-faint); }
 
-/* ---- growlight: a fixed mint chart panel that ignores theme,
-       the same "grow light" mint used throughout the Bloomly
-       companion app — always on, day or night. ---- */
+/* chart panel that stays mint in dark and light */
 .growlight {
   background: linear-gradient(160deg, var(--grow-bg), var(--grow-bg-2)) !important;
   color: var(--grow-ink) !important;
@@ -1043,6 +989,10 @@ td.name-cell .roll { color: var(--text-faint); font-size: 12px; display: block; 
 
 .group-pill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .group-pill {
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
   padding: 16px 10px;
   text-align: center;
   border-radius: var(--radius-sm);
@@ -1090,10 +1040,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
   grid-template-columns: 1fr;
   gap: 20px;
 }
-/* ===== animations.css ===== */
-/* ============================================================
-   ATTENDANCE MANAGER — ANIMATIONS (CSS-only)
-   ============================================================ */
+/* animations */
 
 @keyframes blob-float-a {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -1156,7 +1103,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
   to { transform: scale(2.4); opacity: 0; }
 }
 
-/* ---- page-load entrance ---- */
+/* page load */
 .site-nav { animation: fade-in 0.6s var(--ease); }
 
 .hero h1, .hero p.lead, .hero-cta, .stat-row {
@@ -1170,7 +1117,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 .hero-visual .floating-card:nth-child(2) { animation: fade-up .8s var(--ease) .3s both, float-y 7s ease-in-out 1.2s infinite; }
 .hero-visual .floating-card:nth-child(3) { animation: fade-up .8s var(--ease) .45s both, float-y 5.5s ease-in-out 0.8s infinite; }
 
-/* ---- scroll reveal (CSS only, triggered via .in-view class or animation-timeline fallback) ---- */
+/* scroll reveal */
 .reveal {
   animation: fade-up 0.7s var(--ease) both;
   animation-timeline: view();
@@ -1195,7 +1142,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 .stat-grid .stat-card:nth-child(5) { animation-delay: .25s; }
 .stat-grid .stat-card:nth-child(6) { animation-delay: .3s; }
 
-/* ---- hover micro-interactions ---- */
+/* hover effects */
 .feature-card { transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
 .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-glow); }
 .feature-card:hover .feature-icon { animation: pulse-glow 1.4s ease-in-out infinite; }
@@ -1214,7 +1161,7 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 
 .captcha-refresh.spinning { animation: spin-slow 0.6s linear; }
 
-/* ---- glass reflection sweep on hero visual cards ---- */
+/* shine on hero cards */
 .floating-card { position: absolute; overflow: hidden; }
 .floating-card::before {
   content: '';
@@ -1231,40 +1178,31 @@ hr.rule { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
   100% { left: 130%; }
 }
 
-/* ---- animated background bars for chart ---- */
+/* chart bar animation */
 .bar-chart .bar { animation: grow-bar 1s var(--ease) both; }
 @keyframes grow-bar { from { height: 0 !important; } }
 
-/* ---- page transition fade for main content ---- */
+/* page fade */
 .page-wrap, .auth-wrap .auth-card, main { animation: fade-in 0.5s var(--ease) both; }
 
-/* ---- table row stagger ---- */
+/* table rows */
 tbody tr { animation: fade-in .5s var(--ease) both; }
 
-/* ---- CSS ripple on buttons (no JS) ---- */
+/* button ripple */
 .btn { position: relative; }
 
-/* ---- loading shimmer placeholder utility (unused elements can opt in) ---- */
+/* loading placeholder */
 .shimmer {
   background: linear-gradient(90deg, var(--overlay-1) 0px, var(--overlay-3) 40px, var(--overlay-1) 80px);
   background-size: 400px 100%;
   animation: shimmer 1.6s linear infinite;
 }
 
-/* ===== responsive.css ===== */
-/* ============================================================
-   ATTENDANCE MANAGER — RESPONSIVE
-   ============================================================ */
+/* responsive */
 
-/* ---- Laptop / smaller desktop ---- */
-/* ============================================================
-   MOBILE-FIRST PROGRESSIVE ENHANCEMENT
-   Base rules above = smallest phones. Each tier below only adds
-   what changes as the viewport grows — nothing here overrides
-   anything but its own listed properties.
-   ============================================================ */
+/* mobile first: base styles are for small phones, each breakpoint below adds more */
 
-/* ---- small phone -> phone (421px+) ---- */
+/* phones (421px+) */
 @media (min-width: 421px) {
   .group-pill-grid { grid-template-columns: repeat(3, 1fr); }
   .stat-row { gap: 22px; }
@@ -1272,7 +1210,7 @@ tbody tr { animation: fade-in .5s var(--ease) both; }
   .stat-row .stat span { font-size: 13px; }
 }
 
-/* ---- phone -> tablet (641px+) ---- */
+/* tablets (641px+) */
 @media (min-width: 641px) {
   .container { padding: 0 32px; }
   .nav-inner { padding: 0 28px; }
@@ -1321,7 +1259,7 @@ tbody tr { animation: fade-in .5s var(--ease) both; }
   .step-tabs { flex-wrap: wrap; overflow-x: visible; padding-bottom: 0; }
 }
 
-/* ---- tablet -> small desktop (981px+) ---- */
+/* small desktops (981px+) */
 @media (min-width: 981px) {
   .nav-links { display: flex; }
   .nav-toggle { display: none; }
@@ -1367,13 +1305,13 @@ tbody tr { animation: fade-in .5s var(--ease) both; }
   .heatmap { grid-template-columns: repeat(15, 1fr); }
 }
 
-/* ---- small desktop -> full desktop (1181px+) ---- */
+/* large desktops (1181px+) */
 @media (min-width: 1181px) {
   .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1.2fr; }
   .footer-grid .footer-col:last-child { grid-column: auto; }
 }
 
-/* ---- mobile nav dropdown (toggled via JS class on .site-nav) ---- */
+/* mobile nav dropdown (class added by JS) */
 @media (max-width: 980px) {
   .site-nav.nav-open .nav-links {
     display: flex;
@@ -1391,3 +1329,40 @@ tbody tr { animation: fade-in .5s var(--ease) both; }
   }
   .site-nav.nav-open .nav-links a { width: 100%; padding: 13px 16px; }
 }
+
+/* loading spinner on the login / signup button */
+.btn.is-loading[disabled] { opacity: 0.85; cursor: progress; }
+.btn.is-loading::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  vertical-align: -2px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin-slow 0.7s linear infinite;
+}
+
+
+/* helpers that replace repeated inline styles */
+.mb-16 { margin-bottom: 16px; }
+.mb-18 { margin-bottom: 18px; }
+.pb-0 { padding-bottom: 0; }
+.fs-12-5 { font-size: 12.5px; }
+.fs-13 { font-size: 13px; }
+.fs-13-5 { font-size: 13.5px; }
+.fs-14 { font-size: 14px; }
+.grow { flex: 1; }
+.wrap { flex-wrap: wrap; }
+.text-danger { color: var(--danger); }
+.stack-16 { display: flex; flex-direction: column; gap: 16px; }
+.bar-head { justify-content: space-between; font-size: 13.5px; margin-bottom: 6px; }
+.dot-accent { background: var(--accent-soft); color: var(--accent-2); }
+.dot-success { background: var(--success-soft); color: var(--success); }
+.dot-warning { background: var(--warning-soft); color: var(--warning); }
+.dot-danger { background: var(--danger-soft); color: var(--danger); }
+.remark-input { background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; padding: 6px 10px; color: var(--text); font-size: 13px; }
+.mark-plain { background: none; box-shadow: none; padding: 0; }
+.logo-img { width: 100%; height: 100%; object-fit: contain; display: block; }
